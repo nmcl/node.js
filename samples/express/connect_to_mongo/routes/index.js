@@ -27,4 +27,22 @@ router.get('/tasks', function(req, res) {
     });
 });
 
+router.get('/tasks/new', function(req, res) {
+    res.render('tasks/new.jade', {
+	title: 'New Task'
+    });
+});
+
+router.post('/tasks', function(req, res) {
+    var task = new Task(req.body.task);
+    task.save(function(err) {
+	if (!err) {
+	    res.redirect('/tasks');
+	}
+	else {
+	    res.redirect('/tasks/new');
+	}
+    });
+});
+
 module.exports = router;
