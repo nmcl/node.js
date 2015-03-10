@@ -8,19 +8,6 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/todo_development', function(err) {
-    if (!err)
-    {
-	console.log('connected to MongoDB');
-    }
-    else
-    {
-	throw err;
-    }
-});
-
 var app = express();
 
 // view engine setup
