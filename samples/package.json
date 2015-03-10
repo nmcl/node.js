@@ -1,7 +1,8 @@
 {
-	"name":"example02",
-	"version":"0.0.1",
-	"dependencies": {
-			"underscore":"~1.2.1"
-	}
+  "name": "example02",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.12.2",
+    "underscore": "~1.2.1"
+  }
 }
