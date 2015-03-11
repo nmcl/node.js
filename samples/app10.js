@@ -7,6 +7,7 @@ function someFunction ()
 
 function notDefined ()
 {
+    console.trace();
     try
     {
 	someFunction();
