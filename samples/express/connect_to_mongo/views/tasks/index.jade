@@ -2,6 +2,8 @@ extends ../layout
 
 block content
   h1 Your tasks
+  p
+    a(href='/tasks/new', class='btn btn-primary') Add a Task
 
   - if(docs.length)
     table

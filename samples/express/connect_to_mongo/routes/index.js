@@ -1,5 +1,8 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var router = express.Router();
+router.use(bodyParser());
 
 var mongoose = require('mongoose');
 
@@ -35,6 +38,9 @@ router.get('/tasks/new', function(req, res) {
 
 router.post('/tasks', function(req, res) {
     var task = new Task(req.body.task);
+    console.log("response: "+res.statusCode);
+    console.log("task is "+req.body.task);
+    console.log("and "+task.task);
     task.save(function(err) {
 	if (!err) {
 	    res.redirect('/tasks');
