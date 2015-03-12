@@ -4,5 +4,8 @@
   "dependencies": {
     "express": "^4.12.2",
     "underscore": "~1.2.1"
+  },
+  "devDependencies": {
+    "vows": "~0.7.0"
   }
 }
