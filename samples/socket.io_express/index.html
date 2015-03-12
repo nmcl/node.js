@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Socket.IO Express Example</title>
+</head>
+
+<body>
+<h1>Socker.IO Express Example</h1>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect();
+socket.on('welcome', function(data) {
+  console.log(data.text);
+});
+</script>
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Thu Mar 12 14:47:42 GMT 2015 <!-- hhmts end -->
+</body> </html>
