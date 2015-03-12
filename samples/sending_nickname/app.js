@@ -3,6 +3,8 @@ var express = require('express'),
   server = require('http').createServer(app),
   io = require('socket.io').listen(server);
 
+var nicknames = [];
+
 app.set('port', process.env.PORT || 3000);
 
 if ('development' === app.get('env')) {
@@ -15,7 +17,17 @@ app.get('/', function(req, res) {
 
 io.sockets.on('connection', function(socket) {
     socket.on('nickname', function(data) {
-	console.log('The server received the following nickname: '+data);
+	nicknames.push(data);
+	socket.nickname = data;
+	console.log('Nicknames are '+nicknames);
+    });
+
+    socket.on('disconnect', function() {
+	if (!socket.nickname) return;
+	if (nicknames.indexOf(socket.nickname) > -1) {
+	    nicknames.splice(nicknames.indexOf(socket.nickname), 1);
+	}
+	console.log('Nicknames are '+nicknames);
     });
 });
 
