@@ -22,6 +22,7 @@ io.sockets.on('connection', function(socket) {
 	}
 	else
 	{
+	    console.log('success');
 	    callback(true);
 	    nicknames.push(data);
 	    socket.nickname = data;

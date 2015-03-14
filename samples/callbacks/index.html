@@ -25,7 +25,7 @@
       $(function () {
         $('#set-nickname').submit(function() {
           socket.emit('nickname', $('#nickname').val(), function (data) {
-            if (!data) {
+            if (data) {
               console.log('Nickname set successfully');
               $('#set-nickname').hide();
             } else {
@@ -39,5 +39,5 @@
       });
     </script>
 <address></address>
-<!-- hhmts start -->Last modified: Sat Mar 14 11:58:10 GMT 2015 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Sat Mar 14 16:18:19 GMT 2015 <!-- hhmts end -->
 </body> </html>
