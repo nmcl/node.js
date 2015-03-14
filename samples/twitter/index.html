@@ -3,12 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Socket.io Twitter Example</title>
+    <style>
+      ul.percentage { width: 100% }
+      ul.percentage li { display: block; width: 0 }
+      ul.percentage li span { float: right; display: block}
+      ul.percentage li.nasa { background: #ff0066; color: #fff}
+      ul.percentage li.star { background: #000; color: #fff}
+    </style>
   </head>
   <body>
     <h1>Socket.io Twitter Example</h1>
     <ul class="percentage">
-      <li class="nova">0</li>
-      <li class="nasa">0</li>
+      <li class="nasa">
+        Nasa <span>0</span>
+      </li>
+      <li class="star">
+        Star <span>0</span>
+      </li>
     </ul>
     <ul class="tweets"></ul>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -17,18 +28,24 @@
       var socket = io.connect();
       jQuery(function ($) { 
         var tweetList = $('ul.tweets'),
-            novaCounter = $('li.nova'),
-            nasaCounter = $('li.nasa');
+            nasaCounter = $('li.nasa'),
+            starCounter = $('li.star'),
+            nasaCounterPercentage = $('li.nasa span'),
+            starCounterPercentage = $('li.star span');
         socket.on('tweet', function (data) {
+          nasaCounter
+            .css("width", data.nasa + '%');
+          nasaCounterPercentage
+            .text(Math.round(data.nasa * 10) / 10 + '%');
+          starCounter
+            .css("width", data.star + '%');
+          starCounterPercentage
+            .text(Math.round(data.star * 10) / 10 + '%');
           tweetList
             .prepend('<li>' + data.user + ': ' + data.text + '</li>');
-          novaCounter
-            .text(data.nova + '%');
-          nasaCounter
-            .text(data.nasa + '%');
         });
       });
     </script>
 <address></address>
-<!-- hhmts start -->Last modified: Sat Mar 14 21:36:45 GMT 2015 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Sat Mar 14 21:49:20 GMT 2015 <!-- hhmts end -->
 </body> </html>
