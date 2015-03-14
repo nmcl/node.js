@@ -4,6 +4,8 @@ var express = require('express'),
   server = require('http').createServer(app),
   io = require('socket.io').listen(server);
 
+var nasa = 0, nova = 0, total = 0;
+
 app.set('port', process.env.PORT || 3000);
 
 var twit = new twitter({
@@ -16,11 +18,25 @@ var twit = new twitter({
 // should use volatile.emit but can't get it to work atm
 twit.stream('statuses/filter', { track: 'nasa' }, function(stream) {
   stream.on('data', function (data) {
-      console.log(data.user.screen_name+' : '+data.text);
+      var text = data.text.toLowerCase();
+      if (text.indexOf('nasa') !== -1) {
+	  nasa++;
+	  total++;
+      }
+      if (text.indexOf('nova') !== -1) {
+	  nova++;
+	  total++;
+      }
       io.sockets.emit('tweet', {
 	  user: data.user.screen_name,
-	  text: data.text
+	  text: data.text,
+	  nova: (nova/total)*100,
+	  nasa: (nasa/total)*100
       });
+
+      console.log(data.user.screen_name+' : '+data.text);
+      console.log('nova: '+(nova/total)*100+'%');
+      console.log('nasa: '+(nasa/total)*100+'%');
   });
 });
 
