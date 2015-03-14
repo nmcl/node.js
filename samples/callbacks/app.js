@@ -26,6 +26,7 @@ io.sockets.on('connection', function(socket) {
 	    nicknames.push(data);
 	    socket.nickname = data;
 	    console.log('Nicknames are '+nicknames);
+	    io.sockets.emit('nicknames', nicknames);
 	}
     });
 
