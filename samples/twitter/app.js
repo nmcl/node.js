@@ -9,6 +9,6 @@ var twit = new twitter({
 
 twit.stream('statuses/filter', { track: 'topgear' }, function(stream) {
   stream.on('data', function (data) {
-    console.log(data);
+    console.log(data.user.screen_name+' : '+data.text);
   });
 });
