@@ -35,4 +35,61 @@ app.configure('test', function() {
   app.listen(3001);
 });
 
+app.get('/api/v1/tasks', function(req, res, next){
+  Task.find({}, function (err, docs) {
+    res.send(docs);
+  });
+});
+
+app.post('/api/v1/tasks', function(req, res){
+  var doc = new Task(req.body.task);
+  doc.save(function (err) {
+    if (!err) {
+      res.send(doc);
+    } else {
+      res.send(err, 422);
+    }
+  });
+});
+
+app.get('/api/v1/tasks/:id', function(req, res){
+  Task.findById(req.params.id, function (err, doc){
+    if (doc) {
+      res.send(doc);
+    } else {
+      res.send(404);
+    }
+  });
+});
+
+app.put('/api/v1/tasks/:id', function(req, res){
+  Task.findById(req.params.id, function (err, doc){
+    if (!doc) {
+      res.send(404)
+    } else {
+      doc.updated_at = new Date();
+      doc.task = req.body.task.task;
+      doc.save(function (err) {
+        if (!err) {
+          res.send(doc);
+        } else {
+          res.send(err, 422);
+        }
+      });
+    }
+  });
+});
+
+app.del('/api/v1/tasks/:id', function(req, res){
+  Task.findById(req.params.id, function (err, doc){
+    if (doc) {
+      doc.remove(function() {
+        res.send(200)
+      });
+    } else {
+      res.send(404)
+    }
+  });
+});
+
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
