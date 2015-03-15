@@ -1,7 +1,5 @@
 var http = require('http');
 var twitter = require('twit');
-var data = "";
-var tweets = "";
 
 var twit = new twitter({
   consumer_key: 'LgcXYgdULYjwON5Lyv5SGU8Qk',
@@ -10,6 +8,9 @@ var twit = new twitter({
   access_token_secret: 'x4fQMHcHp2BV31zE21YYG6wTcXNZyjF3XRyMBYN4BPY50'
 });
 
-twit.get('search/tweets', { q: 'node.js', count: 100 }, function(err, data, response) {
-  console.log(data)
+twit.get('search/tweets', { q: 'node.js', count: 10 }, function(err, data, response) {
+    for (var i = 0; i < data.statuses.length; i++)
+    {
+	console.log(data.statuses[i].text);
+    }
 })
