@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+var rebels = [
+    { name: 'Han Solo' },
+    { name: 'Luke Skywalker' },
+    { name: 'C3PO' },
+    { name: 'R2D2' },
+    { name: 'Chewbacca' },
+    { name: 'Princess Leia' },
+    { name: 'Obi-Wan Kenobi'}
+];
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.send(rebels);
 });
 
 module.exports = router;
