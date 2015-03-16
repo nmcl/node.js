@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+var express = require('express'),
+  twitter = require('twitter'),
+  app = express(),
+  server = require('http').createServer(app),
+  io = require('socket.io').listen(server);
+
+if (!process.argv[2]) {
+   console.error('A search term is required!');
+   process.exit(1);
+}
+
+app.set('port', process.env.PORT || 3000);
+
+var twit = new twitter({
+  consumer_key: 'LgcXYgdULYjwON5Lyv5SGU8Qk',
+  consumer_secret: 'iIKDlHsIoLgxqYquMWM2ABlWVlU1oyt9iJKRTzs06tmcyMPDyI',
+  access_token_key: '16669912-zK0uyOKt9yPpAiHsRw8YvPugYVglfdwyWtl7TCqDx',
+  access_token_secret: 'pxAySqVZTIetXZBS2fzRmd2ygWihd6mavcPHqK0RzmAkE'
+});
+
+// should use volatile.emit but can't get it to work atm
+twit.stream('statuses/filter', { track: process.argv[2] }, function(stream) {
+  stream.on('data', function (data) {
+        console.log(data);
+  });
+});
+
+server.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
