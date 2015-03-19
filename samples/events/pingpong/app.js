@@ -19,3 +19,17 @@ pingpong.on('pong', function() {
 	pingpong.emit('ping');
     }, 2000);
 });
+
+var logPing = function() {
+    console.log("Second ping listener got ping");
+};
+
+setTimeout(function() {
+    console.log('Added a second ping listener');
+    pingpong.on('ping', logPing);
+}, 4000);
+
+setTimeout(function() {
+    console.log('Removed second ping listener');
+    pingpong.removeListener('ping', logPing);
+}, 12000);
