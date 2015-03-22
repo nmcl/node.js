@@ -2,9 +2,10 @@
   "name": "ohaithere",
   "version": "1.0.0",
   "description": "dummy example",
-  "main": "index.js",
+  "main": "./lib/ohiathere.js",
+  "bin": "./bin/ohaithere.js",
   "scripts": {
-    "test": "hello"
+    "test": "node ./test/ohaithere.js"
   },
   "keywords": [
     "dummy-example"
