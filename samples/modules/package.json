@@ -1,0 +1,14 @@
+{
+  "name": "ohaithere",
+  "version": "1.0.0",
+  "description": "dummy example",
+  "main": "index.js",
+  "scripts": {
+    "test": "hello"
+  },
+  "keywords": [
+    "dummy-example"
+  ],
+  "author": "Mark Little",
+  "license": "ASL"
+}
