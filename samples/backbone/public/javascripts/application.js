@@ -23,6 +23,21 @@ App.TasksView = Backbone.View.extend({
       tasks: this.collection.models,
       task_template: this.task_template
     }));
+  },
+  events : {
+    'submit form' : 'createTask'
+  },
+  createTask: function (event) {
+    event.preventDefault();
+    var taskTitleInput = $('.task-title');
+    var taskTitle = taskTitleInput.val();
+    tasks.create({ title: taskTitle }, {
+      success: function(task){ 
+        $('#tasks ul')
+          .prepend("<li data-id=" + task.id + ">" + taskTitle + "</li>");
+        taskTitleInput.val('');
+      }
+    });
   }
 });
 
